@@ -2,13 +2,12 @@ package com.example.UserDemo.Service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
+import com.example.UserDemo.UserDto;
 import com.example.UserDemo.domain.User;
 
 public interface UserService {
 
-	List<User> getUsers();
+	List<UserDto> getUsers();
 
 	User getUser(String id);
 

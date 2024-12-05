@@ -1,5 +1,6 @@
 package com.example.UserDemo.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.UserDemo.UserDto;
 import com.example.UserDemo.Repository.UserRepository;
 import com.example.UserDemo.domain.User;
 
@@ -35,9 +37,14 @@ public class UserServiceImpl implements UserService {
 	private BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder(12);
 	
 	@Override
-	public List<User> getUsers() {
+	public List<UserDto> getUsers() {
 		// TODO Auto-generated method stub
-		return userRepository.findAll();
+		List<User> users =  userRepository.findAll();
+		List<UserDto> usersDto = new ArrayList<UserDto>();
+		users.stream().forEach(user->{
+			usersDto.add(modelMapper.map(user, UserDto.class));
+		});
+		return usersDto;
 	}
 
 	@Override
